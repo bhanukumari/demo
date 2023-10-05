@@ -1,0 +1,28 @@
+name: Parallel Jobs Example
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        java-version: [8, 11, 16]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Java
+      uses: actions/setup-java@v2
+      with:
+        java-version: ${{ matrix.java-version }}
+
+    - name: Build and test
+      run: |
+        # Replace this with your build and test commands
+        echo "Building and testing with Java ${{ matrix.java-version }}"
